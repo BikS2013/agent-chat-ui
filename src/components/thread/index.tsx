@@ -189,7 +189,7 @@ export function Thread() {
     handleFileUpload,
     dropRef,
     removeBlock,
-    resetBlocks,
+    resetBlocks: _resetBlocks,
     dragOver,
     handlePaste,
   } = useFileUpload();
@@ -276,6 +276,8 @@ export function Thread() {
       { messages: [...toolMessages, newHumanMessage], context },
       {
         streamMode: ["values"],
+        streamSubgraphs: true,
+        streamResumable: true,
         optimisticValues: (prev) => ({
           ...prev,
           context,
@@ -301,6 +303,8 @@ export function Thread() {
     stream.submit(undefined, {
       checkpoint: parentCheckpoint,
       streamMode: ["values"],
+      streamSubgraphs: true,
+      streamResumable: true,
     });
   };
 
